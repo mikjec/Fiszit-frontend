@@ -1,7 +1,7 @@
-export default function InputError({ messages = '', className = '', ...props }) {
-	if (!messages || (Array.isArray(messages) && messages.length === 0)) return null
+export default function InputError({ message = '', className = '', ...props }) {
+	if (!message || (Array.isArray(message) && message.length === 0)) return null
 
-	const messageArray = Array.isArray(messages) ? messages : [messages]
+	const messageArray = Array.isArray(message) ? message : [message]
 
 	return (
 		<ul

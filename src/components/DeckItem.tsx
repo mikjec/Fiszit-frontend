@@ -1,51 +1,57 @@
-import { Layers, Pencil, Trash2 } from "lucide-react";
+import { Layers, Pencil, Trash2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import type { Flashcard } from './Flashcard'
 
 export type Deck = {
-  id: number;
-  name: string;
-};
+	_id: string
+	name: string
+	public_token?: string | null
+	flashcards: Flashcard[]
+}
 
 type DeckItemProps = {
-  deck: Deck;
-  index: number;
-  onEdit: (deck: Deck) => void;
-  onDelete: (id: number) => void;
-};
+	deck: Deck
+	index: number
+	onEdit: (deck: Deck) => void
+	onDelete: (id: string) => void
+}
 
 export default function DeckItem({ deck, index, onEdit, onDelete }: DeckItemProps) {
-  return (
-    <li
-      className="group flex items-center justify-between px-4 py-3.5 rounded-xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
-      style={{ animation: `fadeUp 0.2s ease-out ${index * 40}ms both` }}
-    >
-      <a
-        href={`/decks/${deck.id}/flashcards`}
-        className="flex-1 min-w-0 flex items-center gap-3"
-      >
-        <div className="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-400 shrink-0 group-hover:bg-sky-100 transition-colors">
-          <Layers className="w-4 h-4" />
-        </div>
-        <span className="text-sm font-medium text-gray-700 truncate group-hover:text-gray-900 transition-colors">
-          {deck.name}
-        </span>
-      </a>
+	return (
+		<li
+			className='group flex items-center justify-between px-4 py-3.5 rounded-xl hover:bg-gray-100 transition-all cursor-pointer'
+			style={{ animation: `fadeUp 0.2s ease-out ${index * 40}ms both` }}>
+			<Link
+				to={`/deck/${deck._id}`}
+				className='flex-1 min-w-0 flex items-center gap-3'>
+				<div className='w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-400 shrink-0 group-hover:bg-sky-100 transition-colors'>
+					<Layers className='w-4 h-4' />
+				</div>
+				<span className='text-sm font-medium text-gray-700 truncate group-hover:text-gray-900 transition-colors'>
+					{deck.name}
+				</span>
+			</Link>
 
-      <div className="flex items-center gap-1 ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button
-          onClick={(e) => { e.preventDefault(); onEdit(deck); }}
-          className="p-2 rounded-lg text-gray-400 hover:text-emerald-500 hover:bg-emerald-50 transition-all"
-          title="Edytuj"
-        >
-          <Pencil className="w-4 h-4" />
-        </button>
-        <button
-          onClick={(e) => { e.preventDefault(); onDelete(deck.id); }}
-          className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all"
-          title="Usuń"
-        >
-          <Trash2 className="w-4 h-4" />
-        </button>
-      </div>
-    </li>
-  );
+			<div className='flex items-center gap-1 ml-3 opacity-100 transition-opacity'>
+				<button
+					onClick={e => {
+						e.preventDefault()
+						onEdit(deck)
+					}}
+					className='p-2 rounded-lg text-gray-400 hover:text-emerald-500 hover:bg-emerald-50 transition-all cursor-pointer'
+					title='Edytuj'>
+					<Pencil className='w-4 h-4' />
+				</button>
+				<button
+					onClick={e => {
+						e.preventDefault()
+						onDelete(deck._id)
+					}}
+					className='p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all cursor-pointer'
+					title='Usuń'>
+					<Trash2 className='w-4 h-4' />
+				</button>
+			</div>
+		</li>
+	)
 }

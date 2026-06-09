@@ -2,9 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 
 const PublicRoute = () => {
-	const { token, isLoading } = useAuth()
-
-	if (isLoading) return <div>Loading...</div>
+	const token = useAuth()
 
 	if (token)
 		return (

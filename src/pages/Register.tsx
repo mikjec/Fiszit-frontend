@@ -34,10 +34,26 @@ export default function Register() {
 
 			navigate('/login')
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				setErrors({ general: error.response?.data?.message ?? 'Błąd rejestracji' })
+			if (axios.isAxiosError(error) && error.response?.data) {
+				const responseData = error.response.data
+
+				if (responseData.errors && typeof responseData.errors === 'object') {
+					const validationErrors: Record<string, string> = {}
+
+					for (const [key, val] of Object.entries(responseData.errors)) {
+						if (Array.isArray(val) && val.length > 0) {
+							validationErrors[key] = val[0]
+						}
+					}
+
+					setErrors(validationErrors)
+				} else if (responseData.message) {
+					setErrors({ general: responseData.message })
+				} else {
+					setErrors({ general: 'Błąd rejestracji' })
+				}
 			} else {
-				setErrors({ general: 'Coś poszło nie tak' })
+				setErrors({ general: 'Coś poszło nie tak (brak połączenia z serwerem)' })
 			}
 		}
 	}

@@ -1,4 +1,13 @@
-export default function PrimaryButton({ children = '', className = '', disabled = false, ...props }) {
+export default function PrimaryButton({
+	children,
+	className = '',
+	disabled = false,
+	...props
+}: {
+	children: React.ReactNode
+	className: string
+	disabled: boolean
+}) {
 	return (
 		<button
 			type='submit'

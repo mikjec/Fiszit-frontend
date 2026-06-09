@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 interface JwtPayload {
 	exp: number
 	[key: string]: unknown
@@ -14,27 +12,13 @@ const isTokenExpired = (token: string): boolean => {
 	}
 }
 
-interface AuthState {
-	token: string | null
-	isLoading: boolean
-}
+export const useAuth = (): string | null => {
+	const token = localStorage.getItem('token')
 
-export const useAuth = (): AuthState => {
-	const [token, setToken] = useState<string | null>(null)
-	const [isLoading, setIsLoading] = useState<boolean>(true)
+	if (token && !isTokenExpired(token)) {
+		return token
+	}
 
-	useEffect(() => {
-		const stored = localStorage.getItem('token')
-
-		if (stored && !isTokenExpired(stored)) {
-			setToken(stored)
-		} else {
-			localStorage.removeItem('token')
-			setToken(null)
-		}
-
-		setIsLoading(false)
-	}, [])
-
-	return { token, isLoading }
+	localStorage.removeItem('token')
+	return null
 }
