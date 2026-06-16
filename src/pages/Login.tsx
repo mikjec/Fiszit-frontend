@@ -58,7 +58,7 @@ export default function Login() {
 						required
 						autoFocus
 						autoComplete='username'
-						onChange={e => setEmail(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
 					/>
 				</div>
 
@@ -77,7 +77,7 @@ export default function Login() {
 						value={password}
 						required
 						autoComplete='current-password'
-						onChange={e => setPassword(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 					/>
 				</div>
 
@@ -117,7 +117,11 @@ export default function Login() {
 						Nie masz jeszcze konta?
 					</a>
 
-					<PrimaryButton className='ms-3 md:text-base'>Zaloguj się</PrimaryButton>
+					<PrimaryButton
+						disabled={false}
+						className='ms-3 md:text-base'>
+						Zaloguj się
+					</PrimaryButton>
 				</div>
 			</form>
 		</div>

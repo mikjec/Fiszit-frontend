@@ -161,6 +161,7 @@ export default function Dashboard() {
 								<p className='text-sm text-gray-400 mt-0.5'>{deckLabel}</p>
 							</div>
 							<PrimaryButton
+								disabled={false}
 								onClick={openCreate}
 								className='flex items-center gap-2 px-4 py-2 bg-sky-300 hover:bg-sky-400 text-white text-sm font-semibold rounded-xl transition-all active:scale-95 shadow-sm'>
 								<LayersPlus className='w-4 h-4' />

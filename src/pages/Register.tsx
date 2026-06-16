@@ -154,7 +154,11 @@ export default function Register() {
 						className='underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9ce4ff]'>
 						Masz już konto?
 					</Link>
-					<PrimaryButton className='ms-4 md:text-base'>Zarejestruj się</PrimaryButton>
+					<PrimaryButton
+						disabled={false}
+						className='ms-4 md:text-base'>
+						Zarejestruj się
+					</PrimaryButton>
 				</div>
 			</form>
 		</div>

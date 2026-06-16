@@ -2,16 +2,19 @@ export default function PrimaryButton({
 	children,
 	className = '',
 	disabled = false,
+	onClick,
 	...props
 }: {
 	children: React.ReactNode
-	className: string
-	disabled: boolean
+	className?: string
+	disabled?: boolean
+	onClick?: React.MouseEventHandler<HTMLButtonElement>
 }) {
 	return (
 		<button
 			type='submit'
 			disabled={disabled}
+			onClick={onClick}
 			className={`inline-flex items-center cursor-pointer px-4 py-3 bg-[#9ce4ff] border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#83bfd5] focus:bg-gray-700 active:bg-[#83bfd5] focus:outline-none focus:ring-2 focus:ring-[#9ce4ff] focus:ring-offset-2 transition ease-in-out duration-150 ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
 			{...props}>
 			{children}

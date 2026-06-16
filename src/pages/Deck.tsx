@@ -177,7 +177,11 @@ export default function Deck() {
 					<div className='flex flex-row'>
 						{deck.public_token ? (
 							<div className='flex flex-col md:flex-row items-start md:items-center'>
-								<PrimaryButton onClick={toggleShare}>Nie udostępniaj</PrimaryButton>
+								<PrimaryButton
+									disabled={false}
+									onClick={toggleShare}>
+									Nie udostępniaj
+								</PrimaryButton>
 								<div className='flex flex-row items-center mt-4 md:mt-0 md:ms-4'>
 									<input
 										type='text'
@@ -194,7 +198,11 @@ export default function Deck() {
 								</div>
 							</div>
 						) : (
-							<PrimaryButton onClick={toggleShare}>Udostępnij</PrimaryButton>
+							<PrimaryButton
+								disabled={false}
+								onClick={toggleShare}>
+								Udostępnij
+							</PrimaryButton>
 						)}
 					</div>
 				</header>
